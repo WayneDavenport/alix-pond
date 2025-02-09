@@ -9,7 +9,76 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 
 export default function Home() {
   const [expandedId, setExpandedId] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState(null);
   const containerRef = useRef(null);
+
+  const backgroundImages = [
+    '/images/hero/alix(1).jpg',
+    '/images/hero/alix(2).jpg',
+    '/images/hero/alix(3).jpg',
+    '/images/hero/alix(4).jpg',
+    '/images/hero/alix(5).jpg',
+    '/images/hero/alix(6).jpg'
+  ];
+
+  const backgroundColors = [
+    "rgb(147, 51, 234)",  // Purple
+    "rgb(59, 130, 246)",  // Blue
+    "rgb(16, 185, 129)",  // Green
+    "rgb(239, 68, 68)",   // Red
+  ];
+
+  // Preload and verify images
+  useEffect(() => {
+    const preloadImage = (src) => {
+      console.log('Attempting to load image:', src); // Debug log
+      return new Promise((resolve, reject) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.onload = () => {
+          console.log('Successfully loaded image:', src); // Debug log
+          setImageLoaded(true);
+          resolve(src);
+        };
+        img.onerror = () => {
+          console.error(`Failed to load image: ${src}`);
+          setImageLoaded(false);
+          reject();
+        };
+      });
+    };
+
+    const loadCurrentImage = async () => {
+      try {
+        await preloadImage(backgroundImages[backgroundIndex]);
+        console.log('Setting current image to:', backgroundImages[backgroundIndex]); // Debug log
+        setCurrentImage(backgroundImages[backgroundIndex]);
+      } catch (error) {
+        console.error('Error in loadCurrentImage:', error); // Debug log
+        setCurrentImage(null);
+      }
+    };
+
+    loadCurrentImage();
+  }, [backgroundIndex]);
+
+  // Add a debug log for render
+  console.log('Current render state:', {
+    currentImage,
+    imageLoaded,
+    backgroundIndex,
+    backgroundColor: backgroundColors[backgroundIndex % backgroundColors.length]
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBackgroundIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (expandedId) {
@@ -69,10 +138,39 @@ export default function Home() {
       <AuroraBackground>
         <div className="container">
           <div className="hero">
-            <section className="hero-title">
-              <h1 className="font-bold mb-2">Alix Pond</h1>
-              <h2 className="text-2xl mb-4">Pet Services</h2>
-            </section>
+            <motion.section
+              className="hero-title-wrapper"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="hero-title-container">
+                <motion.div
+                  className="hero-image-wrapper"
+                  animate={{
+                    opacity: [0, 1],
+                  }}
+                  transition={{
+                    duration: 1,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Image
+                    src={backgroundImages[backgroundIndex]}
+                    alt="Hero background"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    priority
+                  />
+                </motion.div>
+                <div className="hero-title">
+                  <div className="hero-title-content">
+                    <h1 className="font-bold mb-2">Alix Pond</h1>
+                    <h2 className="text-2xl mb-4">Pet Services</h2>
+                  </div>
+                </div>
+              </div>
+            </motion.section>
             <section className="hero-text">
               <p className="text-lg mb-8">Bringing Texas warmth to Alaska&apos;s winters. Experienced pet sitter providing compassionate care for your animal companions.</p>
             </section>
