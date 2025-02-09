@@ -95,7 +95,11 @@ export default function Home() {
     };
   }, [expandedId]);
 
-  useOutsideClick(containerRef, () => setExpandedId(null));
+  useOutsideClick(containerRef, () => {
+    if (expandedId) {
+      setExpandedId(null);
+    }
+  });
 
   const cards = [
     {
@@ -103,9 +107,9 @@ export default function Home() {
       title: 'Cat Services',
       description: 'Professional cat sitting services including feeding, playtime, litter box maintenance, and medication administration if needed. Available for both short visits and extended stays.',
       details: [
-        { label: 'Daily Visits', value: '$25/visit' },
-        { label: 'Overnight', value: '$75/night' },
-        { label: 'Extended Stay', value: 'Custom rates' },
+        { label: 'Daily Visits', value: '$20/30min visit' },
+        { label: 'Overnight', value: '$70/night' },
+        { label: 'Outside Fairbanks', value: '+$15' },
         { label: 'Services Include', value: 'Feeding, Play, Care' }
       ]
     },
@@ -114,27 +118,27 @@ export default function Home() {
       title: 'Dog Services',
       description: 'Comprehensive dog care including walks, feeding, playtime, and overnight stays. We ensure your furry friend gets plenty of exercise and attention.',
       details: [
-        { label: 'Daily Walks', value: '$30/walk' },
-        { label: 'Day Care', value: '$45/day' },
-        { label: 'Overnight', value: '$85/night' },
+        { label: 'Daily Walks', value: '$20/30min walk' },
+        { label: 'Overnight', value: '$80/night' },
+        { label: 'Outside Fairbanks', value: '+$15' },
         { label: 'Services Include', value: 'Walks, Play, Care' }
       ]
     },
     {
       id: 'contact',
       title: 'Contact Info',
-      description: 'Get in touch to schedule a meet and greet or discuss your pet care needs.',
+      description: 'Get in touch to schedule a meet and greet or discuss your pet care needs. Phone calls preferred.',
       details: [
-        { label: 'Phone', value: '(555) 123-4567' },
-        { label: 'Email', value: 'alix@example.com' },
-        { label: 'Area', value: 'Anchorage, AK' },
+        { label: 'Phone', value: 'Call or Text' },
+        { label: 'Email', value: 'alixkerr@gmail.com' },
+        { label: 'Area', value: 'Fairbanks, AK' },
         { label: 'Hours', value: '7am - 9pm Daily' }
       ]
     }
   ];
 
   return (
-    <main className="min-h-[120vh] bg-gradient-to-b from-black via-purple-900 to-black">
+    <main /* className="min-h-[120vh] bg-gradient-to-b from-black via-purple-900 to-black" */>
       <AuroraBackground>
         <div className="container">
           <div className="hero">
@@ -201,48 +205,61 @@ export default function Home() {
 
                   <AnimatePresence>
                     {expandedId === card.id && (
-                      <motion.div
-                        layoutId={`expanded-card-${card.id}`}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{
-                          opacity: 1,
-                          scale: 1,
-                          transition: { duration: 0.2 }
-                        }}
-                        exit={{
-                          opacity: 0,
-                          scale: 0.8,
-                          transition: { duration: 0.2 }
-                        }}
-                        className="fixed inset-0 md:absolute md:inset-auto md:top-[-50px] md:left-0 w-full md:w-[300%] z-50 m-4 md:m-0"
-                        style={{
-                          left: card.id === 'contact' ? '-200%' :
-                            card.id === 'dogs' ? '-100%' : '0'
-                        }}
-                      >
-                        <Card className="overflow-hidden bg-white/20 backdrop-blur-xl border border-white/20 shadow-xl">
-                          <div className="p-6">
-                            <motion.h2 layoutId={`title-${card.id}`} className="text-2xl font-bold mb-4 text-white">
-                              {card.title}
-                            </motion.h2>
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
+                      <div className="fixed inset-0 grid place-items-center z-[100]">
+                        <motion.div
+                          ref={containerRef}
+                          layoutId={`card-${card.id}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{
+                            opacity: 0,
+                            transition: { duration: 0.15 }
+                          }}
+                          className="w-[90vw] max-w-[800px] max-h-[85vh] overflow-auto relative"
+                        >
+                          <Card className="overflow-hidden bg-white/20 backdrop-blur-xl border border-white/20 shadow-xl">
+                            <button
+                              onClick={() => setExpandedId(null)}
+                              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                             >
-                              <p className="text-white/90 mb-6">{card.description}</p>
-                              <div className="grid grid-cols-2 gap-4">
-                                {card.details.map((detail, index) => (
-                                  <div key={index} className="text-white/90">
-                                    <span className="font-semibold">{detail.label}:</span>
-                                    <span className="ml-2">{detail.value}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </motion.div>
-                          </div>
-                        </Card>
-                      </motion.div>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 text-white"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
+                              </svg>
+                            </button>
+                            <div className="p-6">
+                              <motion.h2 layoutId={`title-${card.id}`} className="text-2xl font-bold mb-4 text-white">
+                                {card.title}
+                              </motion.h2>
+                              <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                              >
+                                <p className="text-white/90 mb-6">{card.description}</p>
+                                <div className="grid grid-cols-2 gap-4">
+                                  {card.details.map((detail, index) => (
+                                    <div key={index} className="text-white/90">
+                                      <span className="font-semibold">{detail.label}:</span>
+                                      <span className="ml-2">{detail.value}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            </div>
+                          </Card>
+                        </motion.div>
+                      </div>
                     )}
                   </AnimatePresence>
                 </div>
