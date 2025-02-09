@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { Meteors } from "@/components/ui/meteors";
 
 export default function Home() {
   const [expandedId, setExpandedId] = useState(null);
@@ -220,10 +221,10 @@ export default function Home() {
                           }}
                           className="w-[90vw] max-w-[800px] max-h-[85vh] overflow-auto relative"
                         >
-                          <Card className="overflow-hidden bg-white/20 backdrop-blur-xl border border-white/20 shadow-xl">
+                          <Card className="relative overflow-hidden bg-black/60 backdrop-blur-xl border border-white/20 shadow-xl">
                             <button
                               onClick={() => setExpandedId(null)}
-                              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +241,7 @@ export default function Home() {
                                 />
                               </svg>
                             </button>
-                            <div className="p-6">
+                            <div className="p-6 relative z-20">
                               <motion.h2 layoutId={`title-${card.id}`} className="text-2xl font-bold mb-4 text-white">
                                 {card.title}
                               </motion.h2>
@@ -260,6 +261,7 @@ export default function Home() {
                                 </div>
                               </motion.div>
                             </div>
+                            <Meteors number={20} />
                           </Card>
                         </motion.div>
                       </div>
