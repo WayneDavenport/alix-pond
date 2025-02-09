@@ -65,94 +65,94 @@ export default function Home() {
   ];
 
   return (
+    <main className="min-h-[120vh] bg-gradient-to-b from-black via-purple-900 to-black">
+      <AuroraBackground>
+        <div className="container">
+          <div className="hero">
+            <section className="hero-title">
+              <h1 className="font-bold mb-2">Alix Pond</h1>
+              <h2 className="text-2xl mb-4">Pet Services</h2>
+            </section>
+            <section className="hero-text">
+              <p className="text-lg mb-8">Bringing Texas warmth to Alaska&apos;s winters. Experienced pet sitter providing compassionate care for your animal companions.</p>
+            </section>
+          </div>
 
-    <AuroraBackground>
-      <div className="container">
-        <div className="hero">
-          <section>
-            <h1>Alix Pond</h1>
-            <h2>Pet Services</h2>
-          </section>
-          <section>
-            <p>Bringing Texas warmth to Alaska's winters. Experienced pet sitter providing compassionate care for your animal companions.</p>
-          </section>
+          <div className="relative mt-16" ref={containerRef}>
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              {cards.map((card) => (
+                <div key={card.id} className="relative">
+                  <motion.div
+                    layoutId={`card-${card.id}`}
+                    onClick={() => setExpandedId(expandedId === card.id ? null : card.id)}
+                    className="cursor-pointer"
+                  >
+                    <Card className="overflow-hidden bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 h-24 flex items-center">
+                      <motion.div className="p-4 text-center w-full">
+                        <motion.h2 layoutId={`title-${card.id}`} className="text-xl font-bold text-white">
+                          {card.title}
+                        </motion.h2>
+                      </motion.div>
+                    </Card>
+                  </motion.div>
+
+                  <AnimatePresence>
+                    {expandedId === card.id && (
+                      <motion.div
+                        layoutId={`expanded-card-${card.id}`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                          transition: { duration: 0.2 }
+                        }}
+                        exit={{
+                          opacity: 0,
+                          scale: 0.8,
+                          transition: { duration: 0.2 }
+                        }}
+                        className="fixed inset-0 md:absolute md:inset-auto md:top-[-50px] md:left-0 w-full md:w-[300%] z-50 m-4 md:m-0"
+                        style={{
+                          left: card.id === 'contact' ? '-200%' :
+                            card.id === 'dogs' ? '-100%' : '0'
+                        }}
+                      >
+                        <Card className="overflow-hidden bg-white/20 backdrop-blur-xl border border-white/20 shadow-xl">
+                          <div className="p-6">
+                            <motion.h2 layoutId={`title-${card.id}`} className="text-2xl font-bold mb-4 text-white">
+                              {card.title}
+                            </motion.h2>
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                            >
+                              <p className="text-white/90 mb-6">{card.description}</p>
+                              <div className="grid grid-cols-2 gap-4">
+                                {card.details.map((detail, index) => (
+                                  <div key={index} className="text-white/90">
+                                    <span className="font-semibold">{detail.label}:</span>
+                                    <span className="ml-2">{detail.value}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          </div>
+                        </Card>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
-
-        <div className="relative mt-16" ref={containerRef}>
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            {cards.map((card) => (
-              <div key={card.id} className="relative">
-                <motion.div
-                  layoutId={`card-${card.id}`}
-                  onClick={() => setExpandedId(expandedId === card.id ? null : card.id)}
-                  className="cursor-pointer"
-                >
-                  <Card className="overflow-hidden bg-white/90 backdrop-blur-sm h-24 flex items-center">
-                    <motion.div className="p-4 text-center w-full">
-                      <motion.h2 layoutId={`title-${card.id}`} className="text-xl font-bold">
-                        {card.title}
-                      </motion.h2>
-                    </motion.div>
-                  </Card>
-                </motion.div>
-
-                <AnimatePresence>
-                  {expandedId === card.id && (
-                    <motion.div
-                      layoutId={`expanded-card-${card.id}`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{
-                        opacity: 1,
-                        scale: 1,
-                        transition: { duration: 0.2 }
-                      }}
-                      exit={{
-                        opacity: 0,
-                        scale: 0.8,
-                        transition: { duration: 0.2 }
-                      }}
-                      className="fixed inset-0 md:absolute md:inset-auto md:top-0 md:left-0 w-full md:w-[300%] z-50 m-4 md:m-0"
-                      style={{
-                        left: card.id === 'contact' ? '-200%' :
-                          card.id === 'dogs' ? '-100%' : '0'
-                      }}
-                    >
-                      <Card className="overflow-hidden bg-white/95 backdrop-blur-sm shadow-xl">
-                        <div className="p-6">
-                          <motion.h2 layoutId={`title-${card.id}`} className="text-2xl font-bold mb-4">
-                            {card.title}
-                          </motion.h2>
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                          >
-                            <p className="text-gray-600 mb-6">{card.description}</p>
-                            <div className="grid grid-cols-2 gap-4">
-                              {card.details.map((detail, index) => (
-                                <div key={index}>
-                                  <span className="font-semibold">{detail.label}:</span>
-                                  <span className="ml-2">{detail.value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </motion.div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </AuroraBackground >
-
+      </AuroraBackground>
+    </main>
   );
 }
