@@ -151,7 +151,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
-  background: linear-gradient(to bottom right, rgb(0, 51, 102), rgb(60, 20, 124), rgb(107, 189, 189), rgb(7, 202, 105), rgb(102, 255, 178));
+  background: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(3, 9, 88), rgb(0, 51, 102), rgb(20, 22, 124), rgb(107, 189, 189), rgb(12, 214, 113), rgb(7, 7, 7));
 
   min-height: 160vh;
 }
