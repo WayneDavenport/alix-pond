@@ -149,24 +149,27 @@ export default function Home() {
               transition={{ duration: 0.5 }}
             >
               <div className="hero-title-container">
-                <motion.div
-                  className="hero-image-wrapper"
-                  animate={{
-                    opacity: [0, 1],
-                  }}
-                  transition={{
-                    duration: 1,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <Image
-                    src={backgroundImages[backgroundIndex]}
-                    alt="Hero background"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    priority
-                  />
-                </motion.div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={backgroundIndex}
+                    className="hero-image-wrapper"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Image
+                      src={backgroundImages[backgroundIndex]}
+                      alt="Hero background"
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      priority
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 <div className="hero-title">
                   <div className="hero-title-content">
                     <h1 className="font-bold mb-2">Alix Pond</h1>
