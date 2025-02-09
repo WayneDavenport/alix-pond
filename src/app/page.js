@@ -129,7 +129,7 @@ export default function Home() {
       title: 'Contact Info',
       description: 'Get in touch to schedule a meet and greet or discuss your pet care needs. Phone calls preferred.',
       details: [
-        { label: 'Phone', value: 'Call or Text' },
+        { label: 'Phone', value: '(361) 683-8462' },
         { label: 'Email', value: 'alixkerr@gmail.com' },
         { label: 'Area', value: 'Fairbanks, AK' },
         { label: 'Hours', value: '7am - 9pm Daily' }
