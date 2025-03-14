@@ -180,7 +180,7 @@ export default function Home() {
               </div>
             </motion.section>
             <section className="hero-text">
-              <p className="text-lg mb-8">Bringing Texas warmth to Alaska&apos;s winters. Experienced pet sitter providing compassionate care for your animal companions.</p>
+              <p className="text-lg mb-8">Fairbanks resident and Northern Alaska Tour Company tour specialist, offering experienced pet sitting services. I understand the unique needs of animals in our Alaskan climate and provide reliable, compassionate care.</p>
             </section>
           </div>
 

@@ -4,13 +4,13 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Alix Pond | Pet Services in Anchorage",
-  description: "Professional pet sitting services in Anchorage, Alaska. Offering dog walking, cat sitting, and overnight pet care with Texas warmth.",
-  keywords: "pet sitting, dog walking, cat sitting, Anchorage, Alaska, pet care",
+  title: "Alix Pond | Pet Services Fairbanks",
+  description: "Professional pet sitting services in Fairbanks, Alaska. Offering dog walking, cat sitting, and overnight pet care with Texas warmth.",
+  keywords: "pet sitting, dog walking, cat sitting, Fairbanks, Alaska, pet care",
   openGraph: {
-    title: "Alix Pond | Pet Services in Anchorage",
-    description: "Professional pet sitting services in Anchorage, Alaska. Offering dog walking, cat sitting, and overnight pet care with Texas warmth.",
-    url: "https://alixpond.com",
+    title: "Alix Pond | Pet Services in Fairbanks",
+    description: "Professional pet sitting services in Fairbanks, Alaska. Offering dog walking, cat sitting, and overnight pet care.",
+    url: "https://alixpond.netlify.app",
     siteName: "Alix Pond Pet Services",
     locale: "en_US",
     type: "website",
