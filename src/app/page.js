@@ -21,7 +21,10 @@ export default function Home() {
     '/images/hero/alix(3).jpg',
     '/images/hero/alix(4).jpg',
     '/images/hero/alix(5).jpg',
-    '/images/hero/alix(6).jpg'
+    '/images/hero/alix(6).jpg',
+    '/images/hero/alix(7).jpg',
+    '/images/hero/alix(8).jpg',
+    '/images/hero/alix(9).jpg'
   ];
 
   const backgroundColors = [
@@ -109,7 +112,7 @@ export default function Home() {
       description: 'Professional cat sitting services including feeding, playtime, litter box maintenance, and medication administration if needed. Available for both short visits and extended stays.',
       details: [
         { label: 'Daily Visits', value: '$20/30min visit' },
-        { label: 'Overnight', value: '$70/night' },
+        { label: 'Overnight', value: '$40/night' },
         { label: 'Outside Fairbanks', value: '+$15' },
         { label: 'Services Include', value: 'Feeding, Play, Care' }
       ]
@@ -120,7 +123,7 @@ export default function Home() {
       description: 'Comprehensive dog care including walks, feeding, playtime, and overnight stays. We ensure your furry friend gets plenty of exercise and attention.',
       details: [
         { label: 'Daily Walks', value: '$20/30min walk' },
-        { label: 'Overnight', value: '$80/night' },
+        { label: 'Overnight', value: '$50/night' },
         { label: 'Outside Fairbanks', value: '+$15' },
         { label: 'Services Include', value: 'Walks, Play, Care' }
       ]
