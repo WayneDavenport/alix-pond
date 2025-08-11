@@ -16,15 +16,15 @@ export default function Home() {
   const containerRef = useRef(null);
 
   const backgroundImages = [
-    '/images/hero/alix(1).jpg',
-    '/images/hero/alix(2).jpg',
-    '/images/hero/alix(3).jpg',
-    '/images/hero/alix(4).jpg',
-    '/images/hero/alix(5).jpg',
-    '/images/hero/alix(6).jpg',
-    '/images/hero/alix(7).jpg',
-    '/images/hero/alix(8).jpg',
-    '/images/hero/alix(9).jpg'
+    '/images/hero/alix(1).webp',
+    '/images/hero/alix(2).webp',
+    '/images/hero/alix(3).webp',
+    '/images/hero/alix(4).webp',
+    '/images/hero/alix(5).webp',
+    '/images/hero/alix(6).webp',
+    '/images/hero/alix(7).webp',
+    '/images/hero/alix(8).webp',
+    '/images/hero/alix(9).webp'
   ];
 
   const backgroundColors = [
@@ -254,11 +254,11 @@ export default function Home() {
                                 exit={{ opacity: 0 }}
                               >
                                 <p className="text-white/90 mb-6">{card.description}</p>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                   {card.details.map((detail, index) => (
-                                    <div key={index} className="text-white/90">
+                                    <div key={index} className="text-white/90 break-words">
                                       <span className="font-semibold">{detail.label}:</span>
-                                      <span className="ml-2">{detail.value}</span>
+                                      <span className="ml-2 inline-block">{detail.value}</span>
                                     </div>
                                   ))}
                                 </div>
